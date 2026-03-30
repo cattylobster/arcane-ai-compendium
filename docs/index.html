@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Arcane Compendium of AI & Computation</title>
+  <meta name="description" content="An easy, magical-feeling introduction to AI, computation, math, and systems thinking inspired by the maths-cs-ai-compendium." />
+  <style>
+    :root {
+      --bg: #090611;
+      --bg2: #130b22;
+      --panel: rgba(255,255,255,0.08);
+      --panel2: rgba(255,255,255,0.05);
+      --text: #f6f1ff;
+      --muted: #cfc4eb;
+      --violet: #b388ff;
+      --cyan: #79e7ff;
+      --gold: #ffd66b;
+      --rose: #ff8bd3;
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 24px 80px rgba(0,0,0,0.38);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(179,136,255,0.22), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(121,231,255,0.14), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,139,211,0.14), transparent 25%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      display:flex; justify-content:space-between; align-items:center; padding:22px 0;
+    }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; }
+    .sigil {
+      width:42px; height:42px; border-radius:16px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      color:#120a22; font-weight:900; box-shadow: 0 16px 40px rgba(179,136,255,0.34);
+    }
+    .navlinks { display:flex; gap:18px; color:var(--muted); font-size:14px; }
+    .hero {
+      padding: 42px 0 56px;
+      display:grid; grid-template-columns: 1.12fr 0.88fr; gap:28px; align-items:center;
+    }
+    .eyebrow {
+      display:inline-flex; gap:10px; align-items:center; padding:8px 14px;
+      border:1px solid var(--border); border-radius:999px; background:var(--panel2);
+      font-size:13px; color:var(--muted); margin-bottom:18px;
+    }
+    h1 {
+      font-size: clamp(38px, 7vw, 74px);
+      letter-spacing: -2px; line-height:0.98; margin:0 0 18px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, #ffffff 10%, var(--violet) 45%, var(--cyan) 80%, var(--gold) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead {
+      font-size: clamp(17px, 2vw, 20px); line-height:1.75; color:var(--muted); max-width:680px; margin:0 0 26px;
+    }
+    .cta { display:flex; gap:14px; flex-wrap:wrap; }
+    .btn {
+      padding: 14px 18px; border-radius: 14px; font-weight: 700; border:1px solid var(--border);
+      display:inline-flex; align-items:center; justify-content:center; transition: transform .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .primary { background: linear-gradient(135deg, var(--violet), var(--cyan)); color:#120a22; border:none; }
+    .secondary { background: var(--panel); }
+    .oracle {
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border:1px solid var(--border); border-radius:30px; padding:22px; box-shadow: var(--shadow);
+    }
+    .panel-title { font-size:14px; color:var(--muted); margin-bottom:14px; }
+    .spell {
+      background: rgba(9, 6, 17, 0.68); border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px; padding:16px; margin-bottom:12px;
+    }
+    .spell:last-child { margin-bottom:0; }
+    .spell h3 { margin:0 0 8px; font-size:18px; }
+    .spell p { margin:0; color:var(--muted); line-height:1.65; font-size:15px; }
+    section { padding:54px 0; }
+    .section-title { font-size: clamp(28px, 4vw, 46px); margin:0 0 12px; letter-spacing:-1px; }
+    .section-copy { color:var(--muted); line-height:1.7; font-size:17px; max-width:760px; margin:0 0 26px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card {
+      background: var(--panel); border:1px solid var(--border); border-radius:24px; padding:22px; box-shadow: var(--shadow);
+    }
+    .icon { font-size:24px; margin-bottom:12px; }
+    .card h3 { margin:0 0 10px; font-size:21px; }
+    .card p { margin:0; color:var(--muted); line-height:1.7; }
+    .curriculum { display:grid; gap:16px; }
+    .lesson {
+      background: var(--panel); border:1px solid var(--border); border-radius:22px; padding:20px;
+    }
+    .lesson .tag { color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+    .lesson h3 { margin:0 0 10px; font-size:24px; }
+    .lesson p { margin:0; color:var(--muted); line-height:1.75; }
+    .quote {
+      background: linear-gradient(135deg, rgba(179,136,255,0.16), rgba(121,231,255,0.10));
+      border:1px solid var(--border); border-radius:28px; padding:28px; box-shadow:var(--shadow);
+      font-size:24px; line-height:1.6;
+    }
+    footer { padding:30px 0 40px; color:var(--muted); font-size:14px; }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns:1fr; }
+      .grid { grid-template-columns:1fr; }
+      .navlinks { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand"><div class="sigil">✦</div><div>Arcane AI Compendium</div></div>
+      <div class="navlinks">
+        <a href="#foundations">Foundations</a>
+        <a href="#spells">Spells</a>
+        <a href="#path">Learning Path</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">🔮 Learn AI, math, computation, and systems thinking like an arcane art</div>
+        <h1>The <span class="gradient">arcane way</span><br>to learn AI and computation.</h1>
+        <p class="lead">
+          This site turns the maths-cs-ai-compendium into something easier, more intuitive, and more magical.
+          Instead of drowning in jargon, you learn the hidden logic behind AI as if you're studying spells,
+          symbols, energy flows, and the laws of a deep computational world.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#path">Start learning</a>
+          <a class="btn secondary" href="#foundations">See the foundations</a>
+        </div>
+      </div>
+      <div class="oracle">
+        <div class="panel-title">Inside the grimoire</div>
+        <div class="spell">
+          <h3>Vectors are magical coordinates</h3>
+          <p>They let ideas, words, and patterns exist in a hidden space where closeness means likeness.</p>
+        </div>
+        <div class="spell">
+          <h3>Transforms are alchemy</h3>
+          <p>Linear algebra is not abstract punishment — it is the machinery that changes one form of meaning into another.</p>
+        </div>
+        <div class="spell">
+          <h3>Models are rituals under constraint</h3>
+          <p>An AI model is a spellbook shaped by data, probability, optimization, and the cost of inference.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="foundations">
+    <div class="wrap">
+      <h2 class="section-title">The foundations of the craft</h2>
+      <p class="section-copy">
+        To understand AI deeply, you don’t just memorize definitions. You learn the hidden forces underneath it:
+        representation, uncertainty, transformation, optimization, and systems.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📐</div>
+          <h3>Mathematics</h3>
+          <p>Math is the grammar of the arcane world. Linear algebra shapes space. Probability describes uncertainty. Calculus governs change.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h3>Computation</h3>
+          <p>Algorithms are rituals: precise procedures that transform inputs into outputs under rules and resource limits.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Artificial Intelligence</h3>
+          <p>AI is the art of building systems that compress patterns from data and act on them with increasing usefulness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="spells">
+    <div class="wrap">
+      <h2 class="section-title">Core spells you’ll learn</h2>
+      <p class="section-copy">
+        These are the big ideas behind modern AI, taught in easier language without losing the real structure.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">✨</div>
+          <h3>Embeddings</h3>
+          <p>Turn messy human meaning into coordinates in a hidden semantic space where similar things cluster together.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🕸️</div>
+          <h3>Neural networks</h3>
+          <p>Layered machines that learn complex transformations by adjusting internal weights through feedback.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📡</div>
+          <h3>Attention</h3>
+          <p>The mechanism that lets models decide what matters most right now instead of treating all inputs equally.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎲</div>
+          <h3>Probability</h3>
+          <p>Not just randomness — a disciplined way to reason under uncertainty, ambiguity, and incomplete information.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🏗️</div>
+          <h3>Systems design</h3>
+          <p>The truth that AI only becomes useful when models, data, infra, evaluation, memory, and operations actually work together.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔍</div>
+          <h3>Retrieval & memory</h3>
+          <p>How systems remember: chunking, indexing, scoring, recall, and why memory is never magic — only engineering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="wrap">
+      <h2 class="section-title">A simple learning path</h2>
+      <p class="section-copy">
+        If you want to learn this without being crushed by complexity, follow this sequence.
+      </p>
+      <div class="curriculum">
+        <div class="lesson">
+          <div class="tag">Circle I</div>
+          <h3>See the hidden space</h3>
+          <p>Start with vectors, matrices, and embeddings. Learn to think of meaning, signals, and data as geometry.</p>
+        </div>
+        <div class="lesson">
+          <div class="tag">Circle II</div>
+          <h3>Learn uncertainty</h3>
+          <p>Study probability and statistics as tools for reasoning in an imperfect world rather than as dry formulas.</p>
+        </div>
+        <div class="lesson">
+          <div class="tag">Circle III</div>
+          <h3>Understand the engines</h3>
+          <p>Move into neural networks, transformers, and optimization — the mechanisms that give modern AI its power.</p>
+        </div>
+        <div class="lesson">
+          <div class="tag">Circle IV</div>
+          <h3>Master the real world</h3>
+          <p>Finish with systems design, deployment, testing, memory, and infrastructure — because usable intelligence lives here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="quote">
+        “The real secret is this: AI is not a pile of disconnected tricks. It is one long arc of representation, transformation, uncertainty, memory, and systems — and once you see that, the whole spellbook begins to make sense.”
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      Built from the spirit of the maths-cs-ai-compendium, retold as an arcane learning path.
+    </footer>
+  </div>
+</body>
+</html>
